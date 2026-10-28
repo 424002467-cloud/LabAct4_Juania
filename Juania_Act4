@@ -1,0 +1,77 @@
+
+abstract class Animal {
+  String name;
+  int age;
+
+  Animal(this.name, this.age);
+
+  void makeSound();
+
+  void showInfo() {
+    print("Name: $name");
+    print("Age: $age years old");
+  }
+}
+
+mixin PetCare {
+  void receiveCare() {
+    print("This animal receives food, water, and proper care.");
+  }
+}
+
+class Pet extends Animal {
+  String type;
+
+  Pet(String name, int age, this.type) : super(name, age);
+
+  @override
+  void makeSound() {
+    print("This pet makes a sound.");
+  }
+}
+
+class Dog extends Pet with PetCare {
+  Dog(String name, int age) : super(name, age, "Dog");
+
+  @override
+  void makeSound() {
+    print("Woof! Woof!");
+  }
+}
+
+
+class Cat extends Pet with PetCare {
+  Cat(String name, int age) : super(name, age, "Cat");
+
+  @override
+  void makeSound() {
+    print("Meow! Meow!");
+  }
+}
+
+void main() {
+  Dog dog = Dog("Buddy", 3);
+  Cat cat = Cat("Mimi", 2);
+
+  print("=== ANIMAL MANAGEMENT APP ===");
+
+  print("\n--- Dog Information ---");
+  dog.showInfo();
+  print("Type: ${dog.type}");
+  dog.makeSound();
+  dog.receiveCare();
+
+  print("\n--- Cat Information ---");
+  cat.showInfo();
+  print("Type: ${cat.type}");
+  cat.makeSound();
+  cat.receiveCare();
+
+  print("\n--- Polymorphism Demonstration ---");
+  List<Animal> animals = [dog, cat];
+
+  for (Animal animal in animals) {
+    animal.makeSound();
+  }
+}
+
